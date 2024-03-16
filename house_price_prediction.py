@@ -53,11 +53,14 @@ def process_uploaded_file(uploaded_file):
 
             # Predict prices
             predicted_prices = model.predict(data)
-            # Create a DataFrame to display results
+            # Round the predicted prices to 2 decimal places
+            predicted_prices_rounded = np.round(predicted_prices, 2)
+            # Create a DataFrame to display results, using the rounded prices
             result_df = pd.DataFrame({
                 'House Size (sqft)': data.flatten(),
-                'Predicted Price ($)': predicted_prices.flatten()
+                'Predicted Price ($)': predicted_prices_rounded.flatten()
             })
+            
             return result_df
         except Exception as e:
             st.error(f"Error processing file: {e}")
